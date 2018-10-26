@@ -13,12 +13,16 @@ final class Checksum {
 	 * @see \Magento\Framework\View\Asset\MergeStrategy\Checksum::merge()
 	 * @param Sb $sb
 	 * @param array(string => F) $a
-	 * @param IL $il
+	 * @param IL|F $il
 	 * @return mixed[]
 	 */
 	function beforeMerge(Sb $sb, array $a, IL $il) {
 		$om = OM::getInstance(); /** @var OM $om */
 		$s = $om->get(Source::class); /** @var Source $s */
-		return [array_filter($a, function(F $f) use($s) {return file_exists($s->findSource($f));}), $il];
+		return [
+			!$il instanceof F || 'js' !== $il->getContentType() ? $a :
+				array_filter($a, function(F $f) use($s) {return file_exists($s->findSource($f));})
+			, $il
+		];
 	}
 }

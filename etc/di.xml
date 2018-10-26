@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+<!-- 2018-10-26
+It fixes the «Cannot gather stats» error on clearing the static files cache via the Magento 2 backend. -->
+	<type name='Magento\Framework\View\Asset\MergeStrategy\Checksum'>
+		<plugin
+			name='Dfe\Stat\Plugin\Framework\View\Asset\MergeStrategy\Checksum'
+			type='Dfe\Stat\Plugin\Framework\View\Asset\MergeStrategy\Checksum'
+		/>
+	</type>
+</config>
